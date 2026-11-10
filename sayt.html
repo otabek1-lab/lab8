@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirzayev Otabek | Portfolio</title>
+    <style>
+        /* CSS Variables for Light/Dark Mode */
+        :root {
+            --bg-color: transparent;
+            --text-color: #ffffff;
+            --accent-color: #ffffff;
+            --secondary-bg: rgba(255, 255, 255, 0.1);
+            --border-color: rgba(255, 255, 255, 0.3);
+            --card-bg: rgba(255, 255, 255, 0.15);
+            --nav-bg: rgba(255, 255, 255, 0.2);
+            --header-overlay: rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: transparent;
+            --text-color: #f5f5f5;
+            --accent-color: #ffffff;
+            --secondary-bg: rgba(0, 0, 0, 0.4);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --card-bg: rgba(0, 0, 0, 0.5);
+            --nav-bg: rgba(0, 0, 0, 0.6);
+            --header-overlay: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            /* Prevents the sticky header from overlapping section titles */
+            scroll-padding-top: 80px; 
+        }
+
+        body {
+            background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80') center center fixed;
+            background-size: cover;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Sticky Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Theme Toggle Button */
+        #theme-toggle {
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #theme-toggle:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section with Porsche Background */
+        .hero {
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--header-overlay);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Main Content Layout */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Cards & Grids */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-left: 0.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Network Detective Special Style */
+        .terminal {
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #00ff00;
+            font-family: monospace;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .terminal p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .terminal-header {
+            color: #fff;
+            border-bottom: 1px dashed #333;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Details */
+        .contact-btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #000000;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        
+        footer {
+            text-align: center; 
+            padding: 2rem; 
+            border-top: 1px solid var(--border-color); 
+            background: var(--secondary-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 5%;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            html {
+                scroll-padding-top: 130px; /* Adjusted for taller mobile menu */
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Navigation -->
+    <nav>
+        <a href="#" class="nav-brand">
+            <img src="photo.jpg" alt="Mirzayev Otabek" class="profile-pic" onerror="this.src='https://placehold.co/40x40/000000/FFFFFF?text=MO'">
+            Mirzayev Otabek
+        </a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#courses">Courses</a>
+            <a href="#hobbies">Hobbies</a>
+            <a href="#network">Network</a>
+            <a href="#contact">Contact</a>
+            <button id="theme-toggle">
+                <span id="theme-icon">☀️</span> Light
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Mirzayev Otabek</h1>
+            <p>17 Years Old • First-Year IT Student at Inha University (SOCIE)</p>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="container">
+        
+        <!-- About Section -->
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="card">
+                <p>Hello! I am Mirzayev Otabek, born on November 29, 2008. I am 17 years old and currently navigating my first year as an Information Technology student at Inha University in Tashkent. I am part of the SOCIE (School of Computer and Information Engineering) faculty under the Korean Program.</p>
+                <br>
+                <p>I am passionate about technology, software development, and understanding how modern networks and computing systems operate.</p>
+            </div>
+        </section>
+
+        <!-- Courses & Hobbies (Grid) -->
+        <section class="grid-2">
+            
+            <!-- Courses -->
+            <div id="courses" class="card">
+                <h3>📚 My Courses (SOCIE)</h3>
+                <p>As a first-year student in the School of Computer and Information Engineering at IUT, my core curriculum builds a strong foundation in IT and Engineering:</p>
+                <br>
+                <ul>
+                    <li><strong>Computer Programming:</strong> Learning core logic and structural programming using C/C++.</li>
+                    <li><strong>Calculus:</strong> Advanced mathematics essential for algorithms and engineering concepts.</li>
+                    <li><strong>General Physics:</strong> Understanding the physical principles behind hardware and electronics.</li>
+                    <li><strong>Academic English:</strong> Enhancing professional communication and research skills.</li>
+                </ul>
+            </div>
+
+            <!-- Hobbies -->
+            <div id="hobbies" class="card">
+                <h3>🎮 Hobbies</h3>
+                <p>When I'm not studying coding or mathematics, I spend my free time engaging in competitive and strategic online games:</p>
+                <br>
+                <ul>
+                    <li><strong>Counter-Strike 2 (CS2):</strong> Honing reaction times and team tactics.</li>
+                    <li><strong>Dead by Daylight:</strong> Enjoying asymmetrical survival horror and strategy.</li>
+                    <li><strong>Minecraft:</strong> Relaxing through creative building and survival mechanics.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Network Detective Section -->
+        <section id="network">
+            <h2 class="section-title">Network Detective</h2>
+            <div class="terminal">
+                <div class="terminal-header">
+                    > initiating network scan...<br>
+                    > targeting local environment...
+                </div>
+                <p>[+] ISP Provider Identified: <strong>Uzbektelecom (AS28956)</strong></p>
+                <p>[+] Local Router Manufacturer: <strong>TP-Link Technologies Co., Ltd.</strong></p>
+                <p>[+] Traceroute to 'inha.uz': <strong>12 hops away</strong></p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="card" style="text-align: center;">
+                <p>Feel free to reach out to me for collaborations, study groups, or a game match!</p>
+                <br>
+                <h2>+998 90 952 92 79</h2>
+                <a href="tel:+998909529279" class="contact-btn">Call Now</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const htmlElement = document.documentElement;
+
+            // Check local storage for theme preference, default to dark
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            htmlElement.setAttribute('data-theme', savedTheme);
+            updateToggleButton(savedTheme);
+
+            // Toggle functionality
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                htmlElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateToggleButton(newTheme);
+            });
+
+            // Update button text and icon
+            function updateToggleButton(theme) {
+                if (theme === 'dark') {
+                    themeIcon.textContent = '☀️';
+                    themeToggleBtn.innerHTML = '☀️ Light Mode';
+                } else {
+                    themeIcon.textContent = '🌙';
+                    themeToggleBtn.innerHTML = '🌙 Dark Mode';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
